@@ -20,4 +20,15 @@ class VoteTest extends TestCase
 
         $this->seePageIs(route('front.votes.create'));
     }
+
+    /** @test */
+    public function user_cannot_make_invalid_vote()
+    {
+        $this->json('POST', route('front.votes.store'), [
+            'vote' => 'invalid-vote',
+        ]);
+
+        $this->assertResponseStatus(422);
+        $this->assertArrayHasKey('vote', $this->decodeResponseJson());
+    }
 }
