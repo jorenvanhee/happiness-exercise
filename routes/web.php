@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return 'happiness';
-});
+Route::get('/', ['uses' => 'Front\VotesController@create'])->name('front.votes.create');
+Route::post('votes', ['uses' => 'Front\VotesController@store'])->name('front.votes.store');
