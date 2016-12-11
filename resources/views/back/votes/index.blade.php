@@ -1,3 +1,6 @@
+@extends('back.layouts.default')
+
+@section('content')
 <table border="1">
     <thead>
         <tr>
@@ -28,3 +31,4 @@
         </tr>
     </tbody>
 </table>
+@stop
