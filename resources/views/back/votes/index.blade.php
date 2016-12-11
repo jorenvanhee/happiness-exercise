@@ -10,9 +10,9 @@
     <tbody>
         <tr>
             <th>Day</th>
-            <td>70%</td>
-            <td>20%</td>
-            <td>10%</td>
+            <td>{{ isset($votesToday['happy']) ? $votesToday['happy']->percentage : '0' }}</td>
+            <td>{{ isset($votesToday['neutral']) ? $votesToday['neutral']->percentage : '0' }}</td>
+            <td>{{ isset($votesToday['sad']) ? $votesToday['sad']->percentage : '0' }}</td>
         </tr>
         <tr>
             <th>Week</th>
