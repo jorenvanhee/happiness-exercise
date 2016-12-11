@@ -37,6 +37,19 @@ class Vote extends Model
         ]);
     }
 
+    public function scopeForMonth($query)
+    {
+        $day = Carbon::today();
+
+        $start = $day->copy()->startOfMonth();
+        $end = $day->copy()->endOfMonth();
+
+        return $query->where([
+            ['created_at', '>=', $start],
+            ['created_at', '<=', $end],
+        ]);
+    }
+
     public function scopeGetCountAndPercentage($query)
     {
         $queryForTotalCount = clone $query;

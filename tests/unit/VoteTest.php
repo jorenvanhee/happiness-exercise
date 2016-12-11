@@ -30,13 +30,27 @@ class VoteTest extends TestCase
     {
         $voteThisWeekA = factory(Vote::class)->create(['created_at' => Carbon::today()->startOfWeek()]);
         $voteThisWeekB = factory(Vote::class)->create(['created_at' => Carbon::today()->endOfWeek()]);
-        $votePreviousWeek = factory(Vote::class)->create(['created_at' => Carbon::now()->subWeeks(1)]);
+        $votePreviousWeek = factory(Vote::class)->create(['created_at' => Carbon::now()->subWeek()]);
 
         $votesForThisWeek = Vote::forWeek()->get();
 
         $this->assertTrue($votesForThisWeek->contains($voteThisWeekA));
         $this->assertTrue($votesForThisWeek->contains($voteThisWeekB));
         $this->assertFalse($votesForThisWeek->contains($votePreviousWeek));
+    }
+
+    /** @test **/
+    public function get_votes_for_month()
+    {
+        $voteThisMonthA = factory(Vote::class)->create(['created_at' => Carbon::today()->startOfMonth()]);
+        $voteThisMonthB = factory(Vote::class)->create(['created_at' => Carbon::today()->endOfMonth()]);
+        $votePreviousMonth = factory(Vote::class)->create(['created_at' => Carbon::now()->subMonth()]);
+
+        $votesForThisMonth = Vote::forMonth()->get();
+
+        $this->assertTrue($votesForThisMonth->contains($voteThisMonthA));
+        $this->assertTrue($votesForThisMonth->contains($voteThisMonthB));
+        $this->assertFalse($votesForThisMonth->contains($votePreviousMonth));
     }
 
     /** @test **/

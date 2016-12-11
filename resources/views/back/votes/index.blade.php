@@ -22,9 +22,9 @@
         </tr>
         <tr>
             <th>Month</th>
-            <td>70%</td>
-            <td>20%</td>
-            <td>10%</td>
+            <td>{{ isset($votesMonth['happy']) ? $votesMonth['happy']->percentage : '0' }}</td>
+            <td>{{ isset($votesMonth['neutral']) ? $votesMonth['neutral']->percentage : '0' }}</td>
+            <td>{{ isset($votesMonth['sad']) ? $votesMonth['sad']->percentage : '0' }}</td>
         </tr>
     </tbody>
 </table>
