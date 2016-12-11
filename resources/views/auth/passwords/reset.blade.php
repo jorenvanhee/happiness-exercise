@@ -1,4 +1,4 @@
-{!! Form::open(['action' => 'Auth\LoginController@login']) !!}
+{!! Form::open(['action' => 'Auth\ResetPasswordController@reset']) !!}
     @if ($errors->count())
         <ul>
             @foreach ($errors->all() as $error)
@@ -6,6 +6,7 @@
             @endforeach
         </ul>
     @endif
+    {!! Form::hidden('token', $token) !!}
     <div>
         {!! Form::label('email') !!}
         {!! Form::email('email') !!}
@@ -14,7 +15,9 @@
         {!! Form::label('password') !!}
         {!! Form::password('password') !!}
     </div>
-    {!! Form::button('login', ['type' => 'submit']) !!}
+    <div>
+        {!! Form::label('password_confirmation') !!}
+        {!! Form::password('password_confirmation') !!}
+    </div>
+    {!! Form::button('Reset password', ['type' => 'submit']) !!}
 {!! Form::close() !!}
-
-<a href="{{ action('Auth\ForgotPasswordController@showLinkRequestForm') }}">Reset password</a>
