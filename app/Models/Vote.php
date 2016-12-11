@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\VoteOption;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Vote extends Model
 {
@@ -21,6 +22,19 @@ class Vote extends Model
             ['created_at', '>=', $start],
             ['created_at', '<=', $end],
         ]);
+    }
+
+    public function scopeGetCountAndPercentage($query)
+    {
+        $queryForTotalCount = clone $query;
+
+        return $query
+            ->selectRaw(
+                'vote, count(*) as count, cast(count(*) as float) / ? * 100 as percentage',
+                [$queryForTotalCount->count()]
+            )
+            ->groupBy('vote')
+            ->get();
     }
 
     public function getVoteAttribute($value)
