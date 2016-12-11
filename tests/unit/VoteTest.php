@@ -26,6 +26,20 @@ class VoteTest extends TestCase
     }
 
     /** @test **/
+    public function get_votes_for_week()
+    {
+        $voteThisWeekA = factory(Vote::class)->create(['created_at' => Carbon::today()->startOfWeek()]);
+        $voteThisWeekB = factory(Vote::class)->create(['created_at' => Carbon::today()->endOfWeek()]);
+        $votePreviousWeek = factory(Vote::class)->create(['created_at' => Carbon::now()->subWeeks(1)]);
+
+        $votesForThisWeek = Vote::forWeek()->get();
+
+        $this->assertTrue($votesForThisWeek->contains($voteThisWeekA));
+        $this->assertTrue($votesForThisWeek->contains($voteThisWeekB));
+        $this->assertFalse($votesForThisWeek->contains($votePreviousWeek));
+    }
+
+    /** @test **/
     public function get_vote_count_and_percentage()
     {
         factory(Vote::class, 2)->create(['vote' => VoteOption::SAD]);

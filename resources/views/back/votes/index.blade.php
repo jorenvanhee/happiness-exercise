@@ -16,9 +16,9 @@
         </tr>
         <tr>
             <th>Week</th>
-            <td>70%</td>
-            <td>20%</td>
-            <td>10%</td>
+            <td>{{ isset($votesWeek['happy']) ? $votesWeek['happy']->percentage : '0' }}</td>
+            <td>{{ isset($votesWeek['neutral']) ? $votesWeek['neutral']->percentage : '0' }}</td>
+            <td>{{ isset($votesWeek['sad']) ? $votesWeek['sad']->percentage : '0' }}</td>
         </tr>
         <tr>
             <th>Month</th>

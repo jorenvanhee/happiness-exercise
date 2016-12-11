@@ -24,6 +24,19 @@ class Vote extends Model
         ]);
     }
 
+    public function scopeForWeek($query)
+    {
+        $day = Carbon::today();
+
+        $start = $day->copy()->startOfWeek();
+        $end = $day->copy()->endOfWeek();
+
+        return $query->where([
+            ['created_at', '>=', $start],
+            ['created_at', '<=', $end],
+        ]);
+    }
+
     public function scopeGetCountAndPercentage($query)
     {
         $queryForTotalCount = clone $query;

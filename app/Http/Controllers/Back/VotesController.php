@@ -11,7 +11,8 @@ class VotesController extends Controller
     public function index()
     {
         $votesToday = Vote::forDay()->getCountAndPercentage()->keyBy('vote');
+        $votesWeek = Vote::forWeek()->getCountAndPercentage()->keyBy('vote');
 
-        return view('back.votes.index', compact('votesToday'));
+        return view('back.votes.index', compact('votesToday', 'votesWeek'));
     }
 }
