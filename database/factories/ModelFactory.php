@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\VoteOption;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -20,5 +22,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Models\Vote::class, function (Faker\Generator $faker) {
+    return [
+        'vote' => $faker->randomElement(VoteOption::values()),
     ];
 });

@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class VoteTest extends TestCase
+class CastAVoteTest extends TestCase
 {
     use DatabaseMigrations;
 

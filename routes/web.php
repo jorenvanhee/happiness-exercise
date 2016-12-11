@@ -13,3 +13,5 @@
 
 Route::get('/', ['uses' => 'Front\VotesController@create'])->name('front.votes.create');
 Route::post('votes', ['uses' => 'Front\VotesController@store'])->name('front.votes.store');
+
+Route::get('admin', ['uses' => 'Back\VotesController@index'])->name('back.votes.index');
