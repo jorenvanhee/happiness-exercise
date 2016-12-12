@@ -6,6 +6,7 @@ use App\Models\VoteOption;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use DateTime;
 
 class Vote extends Model
 {
@@ -18,10 +19,7 @@ class Vote extends Model
         $start = $day->copy()->setTime(0, 0, 0);
         $end = $start->copy()->addDay()->subSecond();
 
-        return $query->where([
-            ['created_at', '>=', $start],
-            ['created_at', '<=', $end],
-        ]);
+        return $query->between($start, $end);
     }
 
     public function scopeForWeek($query)
@@ -31,10 +29,7 @@ class Vote extends Model
         $start = $day->copy()->startOfWeek();
         $end = $day->copy()->endOfWeek();
 
-        return $query->where([
-            ['created_at', '>=', $start],
-            ['created_at', '<=', $end],
-        ]);
+        return $query->between($start, $end);
     }
 
     public function scopeForMonth($query)
@@ -44,10 +39,12 @@ class Vote extends Model
         $start = $day->copy()->startOfMonth();
         $end = $day->copy()->endOfMonth();
 
-        return $query->where([
-            ['created_at', '>=', $start],
-            ['created_at', '<=', $end],
-        ]);
+        return $query->between($start, $end);
+    }
+
+    public function scopeBetween($query, DateTime $start, DateTime $end)
+    {
+        return $query->whereBetween('created_at', [$start, $end]);
     }
 
     public function scopeGetCountAndPercentage($query)
