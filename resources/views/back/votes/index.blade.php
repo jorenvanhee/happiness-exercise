@@ -13,21 +13,21 @@
     <tbody>
         <tr>
             <th>Day</th>
-            <td>{{ isset($votesToday['happy']) ? $votesToday['happy']->percentage : '0' }}</td>
-            <td>{{ isset($votesToday['neutral']) ? $votesToday['neutral']->percentage : '0' }}</td>
-            <td>{{ isset($votesToday['sad']) ? $votesToday['sad']->percentage : '0' }}</td>
+            <td>{{ $voteStatsDay->for('happy')->percentage() }}</td>
+            <td>{{ $voteStatsDay->for('neutral')->percentage() }}</td>
+            <td>{{ $voteStatsDay->for('sad')->percentage() }}</td>
         </tr>
         <tr>
             <th>Week</th>
-            <td>{{ isset($votesWeek['happy']) ? $votesWeek['happy']->percentage : '0' }}</td>
-            <td>{{ isset($votesWeek['neutral']) ? $votesWeek['neutral']->percentage : '0' }}</td>
-            <td>{{ isset($votesWeek['sad']) ? $votesWeek['sad']->percentage : '0' }}</td>
+            <td>{{ $voteStatsWeek->for('happy')->percentage() }}</td>
+            <td>{{ $voteStatsWeek->for('neutral')->percentage() }}</td>
+            <td>{{ $voteStatsWeek->for('sad')->percentage() }}</td>
         </tr>
         <tr>
             <th>Month</th>
-            <td>{{ isset($votesMonth['happy']) ? $votesMonth['happy']->percentage : '0' }}</td>
-            <td>{{ isset($votesMonth['neutral']) ? $votesMonth['neutral']->percentage : '0' }}</td>
-            <td>{{ isset($votesMonth['sad']) ? $votesMonth['sad']->percentage : '0' }}</td>
+            <td>{{ $voteStatsMonth->for('happy')->percentage() }}</td>
+            <td>{{ $voteStatsMonth->for('neutral')->percentage() }}</td>
+            <td>{{ $voteStatsMonth->for('sad')->percentage() }}</td>
         </tr>
     </tbody>
 </table>
