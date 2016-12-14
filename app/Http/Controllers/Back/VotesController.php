@@ -11,18 +11,16 @@ class VotesController extends Controller
 {
     public function index()
     {
-        $votesToday = VoteStatsQuery::get(function ($query) {
+        $voteStatsDay = VoteStatsQuery::get(function ($query) {
             return $query->forDay();
-        })->keyBy('vote');
-
-        $votesWeek = VoteStatsQuery::get(function ($query) {
+        });
+        $voteStatsWeek = VoteStatsQuery::get(function ($query) {
             return $query->forWeek();
-        })->keyBy('vote');
-
-        $votesMonth = VoteStatsQuery::get(function ($query) {
+        });
+        $voteStatsMonth = VoteStatsQuery::get(function ($query) {
             return $query->forMonth();
-        })->keyBy('vote');
+        });
 
-        return view('back.votes.index', compact('votesToday', 'votesWeek', 'votesMonth'));
+        return view('back.votes.index', compact('voteStatsDay', 'voteStatsWeek', 'voteStatsMonth'));
     }
 }
