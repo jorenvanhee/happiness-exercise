@@ -47,25 +47,6 @@ class Vote extends Model
         return $query->whereBetween('created_at', [$start, $end]);
     }
 
-    public function scopeGetCountAndPercentage($query)
-    {
-        $queryForTotalCount = clone $query;
-
-        /**
-         * Sqlite needs the "* 1.0". In Sqlite the division of an integer
-         * by another integer will always round down to the closest
-         * integer. We could also use cast(... as float) but mysql does
-         * not support that.
-         */
-        return $query
-            ->selectRaw(
-                'vote, count(*) as count, count(*) * 1.0 / ? * 100 as percentage',
-                [$queryForTotalCount->count()]
-            )
-            ->groupBy('vote')
-            ->get();
-    }
-
     public function getVoteAttribute($value)
     {
         return new VoteOption($value);
