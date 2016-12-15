@@ -12,6 +12,13 @@ class Vote extends Model
 {
     protected $fillable = ['vote'];
 
+    public static function cast(array $attributes = [])
+    {
+        $vote = static::create($attributes);
+
+        return $vote;
+    }
+
     public function scopeForDay($query)
     {
         $day = Carbon::today();

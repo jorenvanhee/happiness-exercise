@@ -21,7 +21,7 @@ class VotesController extends Controller
             'vote' => Rule::in(VoteOption::values()),
         ]);
 
-        Vote::create($request->only('vote'));
+        Vote::cast($request->only('vote'));
 
         return redirect()->route('front.votes.create');
     }
