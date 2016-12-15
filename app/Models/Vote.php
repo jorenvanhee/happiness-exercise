@@ -49,7 +49,9 @@ class Vote extends Model
 
     public function getVoteAttribute($value)
     {
-        return new VoteOption($value);
+        return $value instanceof VoteOption
+            ? $value
+            : new VoteOption($value);
     }
 
     public function setVoteAttribute($value)
