@@ -2,13 +2,14 @@
 
 namespace App\Listeners;
 
+use App\Events\ConsecutiveNegativeVotesDetected;
 use App\Events\VoteCasted;
 use App\Models\VoteOption;
+use Cache;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Cache;
 
-class SendNegativeVotesNotification
+class DetectConsecutiveNegativeVotes
 {
     /**
      * Create the event listener.
@@ -37,7 +38,7 @@ class SendNegativeVotesNotification
         if ($this->hasReachedConsecutiveVotesLimit()) {
             $this->resetConsecutiveVotesCounter();
 
-            // Do stuff
+            event(new ConsecutiveNegativeVotesDetected);
         }
     }
 
