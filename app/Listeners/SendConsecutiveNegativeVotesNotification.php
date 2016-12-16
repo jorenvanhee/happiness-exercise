@@ -3,8 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\ConsecutiveNegativeVotesDetected;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Notifications\ConsecutiveNegativeVotes;
+use App\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 
 class SendConsecutiveNegativeVotesNotification
 {
@@ -26,6 +28,8 @@ class SendConsecutiveNegativeVotesNotification
      */
     public function handle(ConsecutiveNegativeVotesDetected $event)
     {
-        // Do stuff
+        User::all()->each(function ($user) {
+            $user->notify(new ConsecutiveNegativeVotes);
+        });
     }
 }
