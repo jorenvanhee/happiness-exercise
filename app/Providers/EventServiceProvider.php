@@ -13,8 +13,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        'App\Events\VoteCasted' => [
+            'App\Listeners\DetectConsecutiveNegativeVotes',
+        ],
+        'App\Events\ConsecutiveNegativeVotesDetected' => [
+            'App\Listeners\SendConsecutiveNegativeVotesNotification',
         ],
     ];
 

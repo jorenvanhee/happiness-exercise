@@ -17,7 +17,7 @@ class VotesController extends Controller
             'vote' => ['required', Rule::in(VoteOption::values())],
         ]);
 
-        $vote = Vote::create($request->only('vote'));
+        $vote = Vote::cast($request->only('vote'));
 
         return response($vote, Response::HTTP_CREATED);
     }

@@ -2,15 +2,25 @@
 
 namespace App\Models;
 
+use App\Events\VoteCasted;
 use App\Models\VoteOption;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use DateTime;
 
 class Vote extends Model
 {
     protected $fillable = ['vote'];
+
+    public static function cast(array $attributes = [])
+    {
+        $vote = static::create($attributes);
+
+        event(new VoteCasted($vote));
+
+        return $vote;
+    }
 
     public function scopeForDay($query)
     {
